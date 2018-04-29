@@ -1,4 +1,4 @@
-var StoredState = artifacts.require('./StoredState.sol');
+var StoredState = artifacts.require('./StoredState');
 
 module.exports = function(deployer){
     deployer.deploy(StoredState);
