@@ -112,4 +112,30 @@ When this is executed a transaction has been created to update the state.  The o
 ```
 truffle migrate --network azure_node0
 ```
-After a few seconds you should see the deployment of these resources to the Ethereum node running in Azure.
+After a few seconds you should see the deployment of these resources to the Ethereum node running in Azure.  The output will look similar to this:
+```
+Using network 'azure_node0'.
+
+Running migration: 1_initial_migration.js
+  Deploying Migrations...
+  ... 0xbb79bf9e51bd5ca3c237216892e941eba495b19512e655d298e426450f120ad7
+  Migrations: 0x890090d0d40496017359b0adb4bf100d181b90b2
+Saving successful migration to network...
+  ... 0xd608e33298ccd719c6c3be80316b59ffd37cceb70c22cac1dcedeb3e0a0d152c
+Saving artifacts...
+Running migration: 2_deploy_contracts.js
+  Deploying StoredState...
+  ... 0x2a48dfd0a9f28a81bb60ab4b6d8e5e32da027b4ae8a0a2edb39955e9dacecd59
+  StoredState: 0x39efc074df02799b380ff29a603303d1fc9ea9b2
+Saving successful migration to network...
+  ... 0x1ccd92ac6881b7ddc9d5aba680af0a375ceb2e2149abc10a31a2269de2b704bb
+Saving artifacts...
+```
+15. These smart contracts can be interacted with the same as the local development we did above.  To do this, run the following command.
+```
+truffle console --network azure_node0
+```
+Then deployed contracts can be accessed like we did previously.
+```
+StoredState.deployed().then((i) => { return i.get.call() })
+```
