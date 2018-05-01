@@ -139,6 +139,7 @@ Then deployed contracts can be accessed like we did previously.
 ```
 StoredState.deployed().then((i) => { return i.get.call() })
 ```
+<<<<<<< HEAD
 -----
 (_Optional_) : Debugging exceptions
 <br/>
@@ -190,3 +191,5 @@ StoredState.deployed().then((i) => { return i.set(42) })
 debug <paste your tx hash here>
 ```
 10. Next hit the ENTER key a few times to step into the code and as you hit enter noticed the you end up in an endless loop.  This shows how you can debug basic exceptions using the tx debugger.  If you hit the P key on any break, you will see the instructions used on the EVM and the low level data (assembly).
+=======
+>>>>>>> 9168278c55db5a8d639fe8d81957dc9aedd085aa
