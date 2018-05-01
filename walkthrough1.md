@@ -4,7 +4,7 @@
 truffle init
 ```
 3. This will create folder and base templates files for a new project that will serve as a base.  For the initial development, build and test we will use a built in Ethereum blockchain called Ganache to allow rapid development (instant transactions).  To get started, create a new smart contract to show storing state and retrieving state.  This is a simple example but demonstrates the most core operations of the blockchain.
-4. In the contract folder, create a new file named `StoredState.sol`
+4. In the contract folder (if you are using bash command line, cd contracts), create a new file named `StoredState.sol`
 5. Now we need to add some code to this file.  Add the following code snippet
 ```
 pragma solidity ^0.4.23;
