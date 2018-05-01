@@ -4,7 +4,7 @@
 truffle init
 ```
 3. This will create folder and base templates files for a new project that will serve as a base.  For the initial development, build and test we will use a built in Ethereum blockchain called Ganache to allow rapid development (instant transactions).  To get started, create a new smart contract to show storing state and retrieving state.  This is a simple example but demonstrates the most core operations of the blockchain.
-4. In the contract folder, create a new file named `StoredState.sol`
+4. In the contract folder (if you are using bash command line, `cd contracts`), create a new file named `StoredState.sol`
 5. Now we need to add some code to this file.  Add the following code snippet
 ```
 pragma solidity ^0.4.23;
@@ -139,3 +139,54 @@ Then deployed contracts can be accessed like we did previously.
 ```
 StoredState.deployed().then((i) => { return i.get.call() })
 ```
+-----
+(_Optional_) : Debugging exceptions
+<br/>
+Debugging smart contracts is unique because the shared compute resources are used to execute the smart contract code.  Essentially we can setup a debugging environment to trap exceptions and then replay the failing transaction and step through this line by line to help in debugging the flaw.
+
+1. First we need to create an exception.  For this demo we will simulate a infinate loop in our code.  Update the `StoredData.sol` contract to use this code (_note the infinite loop in the set function_)
+```
+pragma solidity ^0.4.23;
+
+contract StoredState {
+    uint storedData;
+
+    function StoredState() public {
+        storedData = 7;
+    }
+
+    function get() public view returns (uint) {
+        return storedData;
+    }
+
+    function set(uint newVal) public {
+        while (true) {
+            storedData = newVal;
+        }
+    }
+}
+```
+2. Now delete the `build` folder at the root of the folder structure.
+3. Next run truffle dev in _log_ mode on a terminal session.
+```
+truffle dev --log
+```
+4. Create another terminal session and start another truffle dev session (you should see it attach to the other session that is logging our output).
+```
+truffle dev
+```
+5. Next in this session, run the migration
+```
+migrate 
+```
+6. Now we need to hit the bug, so call the set method.
+```
+StoredState.deployed().then((i) => { return i.set(42) })
+```
+7. After a few seconds you will get an exception, if you look closely you will see the exception is out of gas error.
+8. Now navigate back to the first terminal (that was logging output).  Copy the transaction hash from the last transaction.
+9. Navigate back to the second terminal session, where the method was called and enter the following
+```
+debug <paste your tx hash here>
+```
+10. Next hit the ENTER key a few times to step into the code and as you hit enter noticed the you end up in an endless loop.  This shows how you can debug basic exceptions using the tx debugger.  If you hit the P key on any break, you will see the instructions used on the EVM and the low level data (assembly).
