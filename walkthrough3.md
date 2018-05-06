@@ -24,11 +24,15 @@ Smart contracts allow coding of logic and state flows in an Ethereum blockchain.
 First, the creation of a new smart contract project.  [Truffle](http://truffleframework.com) is a widely popular tool for assisting in the lifecycle of projects.  To get started using Truffle, you will need to simply install the nodejs package.  Truffle does not contain an IDE by itself.  A variety of lightweight development/scripting IDEs can be used.  In this walkthrough, we will use [VSCode](https://code.visualstudio.com/).
 
 ### Step 1 - Install VSCode and Solidity extension
-1. Navigate to https://code.visualstudio.com/ and download the product based on you operating system (*this demo was built on Windows 10*).
+1. Navigate to https://code.visualstudio.com/ and download the product based on you operating system
+
+`(*this demo was built on Windows 10*)`.
+
 2. Navigate to https://marketplace.visualstudio.com/items?itemName=JuanBlanco.solidity and install this extension for VSCode.
 
 ### Step 2 - Install GIT
 1. Navigate to https://git-scm.com/downloads and download the version based on hyour operating system (*this demo was built on Windows 10*)
+
 `NOTE: For Windows installation, the default options for installation works well, with the exception of choosing Git bash only when prompted for the command line experience.`
 
 ### Step 3 - Install NodeJS and Truffle
@@ -38,12 +42,12 @@ First, the creation of a new smart contract project.  [Truffle](http://trufflefr
 
 ### Step 4 - Initialize terminal in VSCode
 1. Start VSCode.
-2. Press the <CTRL> + ~ key to launch an integrated terminal window.
+2. Press the `<CTRL> + ~` key to launch an integrated terminal window.
 3. A prompt in the lower left corner will allow you to customize the defaults for the terminal.  Click `Customize` and select Git Bash from the options.
 
 ### Step 5 - Creating your first Truffle project and smart contract
 1. Start VSCode (if its not already running)
-2. Open the terminal window (<CTRL> + ~)
+2. Open the terminal window (`<CTRL> + ~`)
 3. In the terminal window type
 ```
 mkdir MyProject
@@ -72,10 +76,10 @@ contract Storage {
     }
 }
 ```
-7. Type <CTRL> + S to save this file.
+7. Type `<CTRL> + S` to save this file.
 
 ### Step 6 - Compiling, deployment and function testing of smart contracts
-1. Now that our first contract is created, the first step that should be done is validating that our syntax is correct and we have a valid smart contract that can be deployed to a blockchain.  To do this, navigate back to the terminal window (if its not open use <CTRL> + ~ to toggle it open).  Next enter the following command to compile the contract.
+1. Now that our first contract is created, the first step that should be done is validating that our syntax is correct and we have a valid smart contract that can be deployed to a blockchain.  To do this, navigate back to the terminal window (if its not open use `<CTRL> + ~` to toggle it open).  Next enter the following command to compile the contract.
 ```
 truffle compile
 ```
@@ -97,7 +101,7 @@ module.exports = function(deployer) {
 ```
 `NOTE: Truffle will deploy/migrate all migrations in the migrations folder in order by the number in the file name (1, 2, 3, ...)`
 
-5. Save the file by typing <CTRL> + S.
+5. Save the file by typing `<CTRL> + S`.
 6. Next the migration will be run locally.  Truffle includes a "in memory" blockchain (Ganache) that will offer a Ethereum compatible interface with a very small footprint.  This is ideal for developers that are looking to test basic functionally before deploying these assets to more concrete blockchains instances in staging, production, etc.  To deploy to this developer blockchain run the following.
 ```
 truffle develop
@@ -204,7 +208,7 @@ web3.fromWei(eth.getBalance(eth.accounts[0]), "ether")
 personal.unlockAccount(eth.accounts[0], "<the password you gave this account>", 500)
 ```
 
-14.  This command will return true when done correctly and will remain unlocked for 8 minutes.  Next move back to VSCode, and in the terminal window, stop the current Truffle develop session by typing CTRL + C (twice).  Next type the following to target the testnet, Ropsten.
+14.  This command will return true when done correctly and will remain unlocked for 8 minutes.  Next move back to VSCode, and in the terminal window, stop the current Truffle develop session by typing `CTRL + C` (twice).  Next type the following to target the testnet, Ropsten.
 ```
 truffle console --network ropsten
 ```
