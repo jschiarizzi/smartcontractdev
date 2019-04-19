@@ -102,3 +102,7 @@ geth --datadir node1/ --syncmode 'full' --port 30311 --rpc --rpcaddr '0.0.0.0' -
 
 geth --datadir node2/ --syncmode 'full' --port 30312 --rpc --rpcaddr '0.0.0.0' --rpccorsdomain '*' --rpcport 8502 --rpcapi 'personal,db,eth,net,web3,txpool,miner' --bootnodes 'enode://<this number will come from the bootnode after it starts>@127.0.0.1:30310' --networkid 1010 --gasprice '0' --unlock '<account address for node2>' --password password.txt --mine
 ```
+In case you do not get the enode hex number when bootnode starts you can extract it with this
+```
+bootnode --nodekeyhex <nodekey> -writeaddress
+```
