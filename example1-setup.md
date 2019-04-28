@@ -10,7 +10,7 @@
 #### Step 3 - Create the Ethereum backend network (single vm / multi node)
 1. Create an Azure VM with Ubuntu 16.04LTS base operating system -> [here](https://portal.azure.com/#create/Canonical.UbuntuServer1604LTS-ARM)
 2. After the VM is provisioned, run the following:
-  1. Modify the NSG to open port 8501 and 8502.
+  1. Modify the NSG to open port 8501 and 8502. You can do this by adding a rule under Networking in your dashboard for the server. 
   2. Install Go Ethereum (latest) ->
 ```
     sudo apt-get install software-properties-common
@@ -38,7 +38,7 @@
 ```
     echo 'test' > password.txt
 ```
-  7. Create a new genesis file for blockchain initialization.  This can be created a variety of ways but the latest geth include puppeth to automate this process with a wizard.  Follow the steps contained below.
+  7. Create a new genesis file for blockchain initialization.  This can be created a variety of ways but the latest geth include the `puppeth` command to automate this process with a wizard.  Follow the steps contained below.
 ```
 Please specify a network name to administer (no spaces, please)
 > deveth
@@ -98,9 +98,9 @@ bootnode -nodekey boot.key -verbosity 9 -addr 127.0.0.1:30310
 ```
   11. Lastly we will start our geth nodes on both (node1/node2)
 ```
-geth --datadir node1/ --syncmode 'full' --port 30311 --rpc --rpcaddr '0.0.0.0' --rpccorsdomain '*' --rpcport 8501 --rpcapi 'personal,db,eth,net,web3,txpool,miner' --bootnodes 'enode:/<this number will come from the bootnode after it starts>@127.0.0.1:30310' --networkid 1010 --gasprice '0' --unlock '<account address for node1>' --password password.txt --mine
+geth --datadir node1/ --syncmode 'full' --port 30311 --rpc --rpcaddr '0.0.0.0' --rpccorsdomain '*' --rpcport 8501 --rpcapi 'personal,db,eth,net,web3,txpool,miner' --bootnodes 'enode://<this hex string will come from the bootnode after it starts>@127.0.0.1:30310' --networkid 1010 --gasprice '0' --unlock '<account address for node1>' --password password.txt --mine
 
-geth --datadir node2/ --syncmode 'full' --port 30312 --rpc --rpcaddr '0.0.0.0' --rpccorsdomain '*' --rpcport 8502 --rpcapi 'personal,db,eth,net,web3,txpool,miner' --bootnodes 'enode://<this number will come from the bootnode after it starts>@127.0.0.1:30310' --networkid 1010 --gasprice '0' --unlock '<account address for node2>' --password password.txt --mine
+geth --datadir node2/ --syncmode 'full' --port 30312 --rpc --rpcaddr '0.0.0.0' --rpccorsdomain '*' --rpcport 8502 --rpcapi 'personal,db,eth,net,web3,txpool,miner' --bootnodes 'enode://<this hex string will come from the bootnode after it starts>@127.0.0.1:30310' --networkid 1010 --gasprice '0' --unlock '<account address for node2>' --password password.txt --mine
 ```
 In case you do not get the enode hex number when bootnode starts you can extract it with this
 ```
